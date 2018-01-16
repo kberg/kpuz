@@ -6,8 +6,7 @@ import re
 # False for ASCII, True for Binary
 output = True
 
-input_file = sys.argv[1]
-output_file = sys.argv[2]
+_, input_file, output_file = sys.argv
 
 def printASCII(ip):
   def header(s):
