@@ -4,9 +4,6 @@ import ipuz
 import sys
 import re
 
-# False for ASCII, True for Binary
-output = True
-
 _, input_file, output_file = sys.argv
 
 def printASCII(ip):
@@ -86,7 +83,9 @@ try:
 except ipuz.IPUZException:
     print "Yuk."
 
-if output:
+if output_file.endswith(".puz"):
   printBinary(ip)
-else:
+elif output_file.endswith(".txt"):
   printASCII(ip)
+else:
+  print("output_file not puz or txt")
