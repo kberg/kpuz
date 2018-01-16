@@ -1,3 +1,4 @@
+import codecs
 import puz
 import ipuz
 import sys
@@ -14,7 +15,7 @@ def printASCII(ip):
 
   def data(s):
     of.write("    %s\n" % s)
-  of = open(output_file, 'w')
+  of = codecs.open(output_file, 'w', 'utf-8')
 
   header("ACROSS PUZZLE V2")
     
