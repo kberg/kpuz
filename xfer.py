@@ -1,10 +1,30 @@
-import codecs
+# -*- encoding: utf-8 -*-
+
 import puz
 import ipuz
 import sys
 import re
 
 _, input_file, output_file = sys.argv
+
+LATIN1_SUBS = {
+  u"“": u'"',
+  u"”": u'"',
+  u"‘": u"'",
+  u"’": u"'",
+  u"–": u"--",
+  u"—": u"---",
+  u"…": u"...",
+  u"№": u"No.",
+  u"π": u"pi",
+  u"🔥": u"[emoji: fire]",
+  u"🙈": u"[emoji: monkey with hands over eyes]",
+  u"👉🏾": u"[emoji: hand pointing right]",
+  u"👆🏻": u"[emoji: hand pointing up]",
+  u"🤘🏽": u"[emoji: hand with raised index and pinky finger]",
+  u"✊🏿": u"[emoji: fist]",
+  u"ǐ": "i",
+}
 
 def printASCII(ip):
   def header(s):
@@ -66,14 +86,17 @@ def printBinary(ip):
     
   # Fortunately ipuz specifies clue numbers, which allows us to order
   # in PUZ's unclear clue ordering.
-  a = [c + [0] for c in ip['clues']['Across']]
-  d = [c + [.5] for c in ip['clues']['Down']]
-  both = sorted(a + d, key = lambda c : (c[0] + c[2]))
-    
-  np.clues = [c[1] for c in both]
+  a = [(n, latin1ify(clue)) for n, clue in ip['clues']['Across']]
+  d = [(n + 0.5, latin1ify(clue)) for n, clue in ip['clues']['Down']]
+  np.clues = [clue for _, clue in sorted(a + d)]
    
   # np.preamble = ip['intro']
   np.save(output_file)
+
+def latin1ify(s):
+  for search, replace in LATIN1_SUBS.items():
+    s = s.replace(search, replace)
+  return s
 
 # Start
 with open(input_file) as x: idata = x.read()
