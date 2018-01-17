@@ -89,7 +89,16 @@ def printBinary(ip):
   a = [(n, latin1ify(clue)) for n, clue in ip['clues']['Across']]
   d = [(n + 0.5, latin1ify(clue)) for n, clue in ip['clues']['Down']]
   np.clues = [clue for _, clue in sorted(a + d)]
-   
+
+  np.markup().markup = [0] * np.width * np.height
+  for y, cols in enumerate(ip['puzzle']):
+    for x, cell in enumerate(cols):
+      if not isinstance(cell, dict):
+        continue
+      shapebg = cell.get('style', {}).get('shapebg')
+      if shapebg == 'circle':
+        np.markup().markup[y * np.width + x] = puz.GridMarkup.Circled
+
   # np.preamble = ip['intro']
   np.save(output_file)
 
