@@ -1,3 +1,4 @@
+#! /usr/bin/env python
 import puz
 import ipuz
 import sys

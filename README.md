@@ -1,7 +1,7 @@
 # kpuz
 Convert ipuz Crosswords to puz format.
 
-This relies on the [puzpy](https://github.com/svisser/ipuz) and [ipuz](https://github.com/alexdej/puzpy) libraries.
+This relies on the [puzpy](https://github.com/svisser/ipuz) and [ipuz](https://github.com/alexdej/puzpy) libraries. To install dependencies: `pip install -r requirements.txt`.
 
 `xfer.py` takes two parameters: an ipuz input file and a puz output file.
 `dump.py` dumps a puz-formatted file for easy viewing.
