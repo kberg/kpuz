@@ -114,7 +114,7 @@ with open(input_file) as x: idata = x.read()
 try:
     ip = ipuz.read(idata)
 except ipuz.IPUZException:
-    print "Error reading puzzle!"
+    print("Error reading puzzle!")
     raise
 
 if output_file.endswith(".puz"):
